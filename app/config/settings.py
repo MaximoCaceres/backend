@@ -6,9 +6,10 @@ import os
 class Settings(BaseSettings):
 
     #Configuracion de la base de datos
-    DATABASE_URL: str = "mysql+pymyqsl://root:Maxi123@localhost:3306/biblioteca_bd"
+    DATABASE_URL: str = "mysql+pymysql://root:Maxi123@localhost:3306/biblioteca_bd"
+    
     #JWT
-    SECRET_KEY: str ="your_secret_key_here"
+    SECRET_KEY: str ="clave_secreta_biblioteca"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 

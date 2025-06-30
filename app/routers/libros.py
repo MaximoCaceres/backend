@@ -22,7 +22,6 @@ async def get_libros(
     """
     libros = LibroService.get_libros(db, skip=skip, limit=limit)
     
-    # Agregar información de disponibilidad
     libros_response = []
     for libro in libros:
         disponible = LibroService.verificar_disponibilidad(db, libro.id)
@@ -49,7 +48,6 @@ async def get_libros_disponibles(
 ):
     """
     Obtener libros disponibles (sin préstamos activos)
-    Consulta requerida: 1. Obtener todos los libros disponibles (Sin prestar)
     """
     libros = LibroService.get_libros_disponibles(db, skip=skip, limit=limit)
     
@@ -62,7 +60,7 @@ async def get_libros_disponibles(
             "isbn": libro.isbn,
             "editorial": libro.editorial,
             "categoria_id": libro.categoria_id,
-            "disponible": True,  # Ya están filtrados como disponibles
+            "disponible": True,
             "categoria": libro.categoria
         }
         libros_response.append(libro_dict)
@@ -77,7 +75,7 @@ async def buscar_libros(
 ):
     """
     Buscar libros por título, autor o categoría
-    Consulta requerida: 2. Buscar libros por título, autor o categoría
+
     """
     libros = LibroService.buscar_libros(db, busqueda)
     
@@ -106,7 +104,6 @@ async def get_libros_by_categoria(
 ):
     """
     Obtener libros de una categoría específica
-    Consulta requerida: 5. Listar todos los libros de una categoría específica
     """
     libros = LibroService.get_libros_by_categoria(db, categoria_id)
     

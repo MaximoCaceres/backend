@@ -60,5 +60,5 @@ async def get_resumen_dashboard(
             },
             "categoria_popular": estadisticas["categoria_mas_popular"]
         },
-        "timestamp": datetime.now()
+        "timestamp": datetime.datetime.now()
     }

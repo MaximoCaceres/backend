@@ -18,8 +18,8 @@ async def create_prestamo(
 ):
     """
     Registrar nuevo préstamo
-    El usuario_id se obtiene del token JWT del usuario actual
     """
+    #El usuario_id se obtiene del token JWT del usuario actual
     prestamo = PrestamoService.create_prestamo(db, prestamo_data, current_user.id)
     return prestamo
 
@@ -30,8 +30,8 @@ async def get_mis_prestamos_activos(
 ):
     """
     Obtener préstamos activos del usuario actual
-    Consulta requerida: 3. Obtener la lista de préstamos activos de un usuario
     """
+    #Consulta requerida: 3. Obtener la lista de préstamos activos de un usuario
     prestamos = PrestamoService.get_prestamos_activos_usuario(db, current_user.id)
     return prestamos
 
@@ -44,8 +44,8 @@ async def get_mi_historial_prestamos(
 ):
     """
     Obtener historial completo de préstamos del usuario actual
-    Consulta requerida: 4. Obtener el historial de préstamos de un usuario
     """
+    #Consulta requerida: 4. Obtener el historial de préstamos de un usuario
     prestamos = PrestamoService.get_historial_prestamos_usuario(
         db, current_user.id, skip=skip, limit=limit
     )
@@ -98,9 +98,9 @@ async def get_prestamo_by_id(
 ):
     """
     Obtener préstamo por ID
-    Los usuarios solo pueden ver sus propios préstamos
-    Los bibliotecarios pueden ver cualquier préstamo
     """
+    #Los usuarios solo pueden ver sus propios préstamos
+    #Los bibliotecarios pueden ver cualquier préstamo
     prestamo = PrestamoService.get_prestamo_by_id(db, prestamo_id)
     
     # Verificar permisos: solo el dueño del préstamo o bibliotecarios

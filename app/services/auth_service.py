@@ -16,7 +16,7 @@ class AuthService:
         Registra un nuevo usuario en la base de datos.
         """
         try:
-            hashed_password = get_password_hash(user_data.password)
+            hashed_password = get_password_hash(user_data.password.get_secret_value())
             new_user = Usuario(
                 nombre=user_data.nombre,
                 email=user_data.email,
@@ -37,7 +37,8 @@ class AuthService:
         Autentica al usuario y devuelve un token JWT si las credenciales son válidas.
         """
         user = db.query(Usuario).filter(Usuario.email == login_data.email).first()
-        if not user or not verify_password(login_data.password, user.password):
+        plain_password = login_data.password.get_secret_value()
+        if not user or not verify_password(plain_password, user.password):
             raise invalid_credentials_exception
         return user
     

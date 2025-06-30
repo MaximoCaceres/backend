@@ -1,4 +1,4 @@
-from pydantic import BaseModel, field, field_validator
+from pydantic import BaseModel, Field, field_validator
 from typing import Optional
 from .categoria import CategoriaResponse
 
@@ -7,6 +7,7 @@ class LibroBase(BaseModel):
     titulo: str
     autor: str
     isbn: str
+    editorial: Optional[str] = None
     categoria_id: int
 
     @field_validator("titulo", "autor", "isbn")
