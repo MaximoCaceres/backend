@@ -37,17 +37,15 @@ async def get_mis_prestamos_activos(
 
 @router.get("/mis-prestamos/historial", response_model=List[PrestamoResponse])
 async def get_mi_historial_prestamos(
-    skip: int = Query(0, ge=0),
-    limit: int = Query(100, ge=1, le=100),
     current_user: Usuario = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
     """
     Obtener historial completo de préstamos del usuario actual
     """
-    #Consulta requerida: 4. Obtener el historial de préstamos de un usuario
+    #Consulta requerida: 4.
     prestamos = PrestamoService.get_historial_prestamos_usuario(
-        db, current_user.id, skip=skip, limit=limit
+        db, current_user.id
     )
     return prestamos
 
@@ -66,8 +64,6 @@ async def get_prestamos_activos_usuario(
 @router.get("/usuario/{usuario_id}/historial", response_model=List[PrestamoResponse])
 async def get_historial_prestamos_usuario(
     usuario_id: int,
-    skip: int = Query(0, ge=0),
-    limit: int = Query(100, ge=1, le=100),
     current_user: Usuario = Depends(get_current_bibliotecario),
     db: Session = Depends(get_db)
 ):
@@ -75,7 +71,7 @@ async def get_historial_prestamos_usuario(
     Obtener historial de préstamos de un usuario específico (solo bibliotecarios)
     """
     prestamos = PrestamoService.get_historial_prestamos_usuario(
-        db, usuario_id, skip=skip, limit=limit
+        db, usuario_id
     )
     return prestamos
 

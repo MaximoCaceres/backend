@@ -8,7 +8,7 @@ class PrestamoBase(BaseModel):
     libro_id: int
     usuario_id: int
 
-class PrestamoCreate(PrestamoBase):
+class PrestamoCreate(BaseModel):
     libro_id: int
     #el usuario_id se obtiene del token JWT
 

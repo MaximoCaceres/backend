@@ -35,13 +35,13 @@ class PrestamoService:
         ).all()
     
     @staticmethod
-    def get_historial_prestamos_usuario(db: Session, usuario_id: int, skip: int = 0, limit: int = 100) -> List[Prestamo]:
+    def get_historial_prestamos_usuario(db: Session, usuario_id: int) -> List[Prestamo]:
         """
         Obtener historial completo de préstamos de un usuario
         """
         return db.query(Prestamo).filter(
             Prestamo.usuario_id == usuario_id
-        ).order_by(Prestamo.fecha_prestamo.desc()).offset(skip).limit(limit).all()
+        ).order_by(Prestamo.fecha_prestamo.desc()).all()
     
     @staticmethod
     def get_todos_prestamos_activos(db: Session) -> List[Prestamo]:

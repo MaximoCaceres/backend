@@ -12,15 +12,13 @@ router = APIRouter(prefix="/libros", tags=["Libros"])
 
 @router.get("/", response_model=List[LibroResponse])
 async def get_libros(
-    skip: int = Query(0, ge=0),
-    limit: int = Query(100, ge=1, le=100),
     current_user: Usuario = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
     """
     Obtener lista de todos los libros
     """
-    libros = LibroService.get_libros(db, skip=skip, limit=limit)
+    libros = LibroService.get_libros(db)
     
     libros_response = []
     for libro in libros:
@@ -42,14 +40,13 @@ async def get_libros(
 @router.get("/disponibles", response_model=List[LibroResponse])
 async def get_libros_disponibles(
     skip: int = Query(0, ge=0),
-    limit: int = Query(100, ge=1, le=100),
     current_user: Usuario = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
     """
     Obtener libros disponibles (sin préstamos activos)
     """
-    libros = LibroService.get_libros_disponibles(db, skip=skip, limit=limit)
+    libros = LibroService.get_libros_disponibles(db)
     
     libros_response = []
     for libro in libros:
@@ -70,7 +67,6 @@ async def get_libros_disponibles(
 @router.post("/buscar", response_model=List[LibroResponse])
 async def buscar_libros(
     busqueda: LibroBusqueda,
-    current_user: Usuario = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
     """

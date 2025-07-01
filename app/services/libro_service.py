@@ -33,7 +33,7 @@ class LibroService:
         return db.query(Libro).offset(skip).limit(limit).all()
     
     @staticmethod
-    def get_libros_disponibles(db: Session, skip: int = 0, limit: int = 100) -> List[Libro]:
+    def get_libros_disponibles(db: Session) -> List[Libro]:
         """
         Obtener libros disponibles (sin préstamos activos)
         """
@@ -45,7 +45,7 @@ class LibroService:
         # Query principal excluyendo libros con préstamos activos
         return db.query(Libro).filter(
             ~Libro.id.in_(prestamos_activos)
-        ).offset(skip).limit(limit).all()
+            )
     
     @staticmethod
     def buscar_libros(db: Session, busqueda: LibroBusqueda) -> List[Libro]:

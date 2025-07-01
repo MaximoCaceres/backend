@@ -33,15 +33,13 @@ async def update_current_user(
 
 @router.get("/", response_model=List[UsuarioResponse])
 async def get_usuarios(
-    skip: int = Query(0, ge=0),
-    limit: int = Query(100, ge=1, le=100),
     current_user: Usuario = Depends(get_current_bibliotecario),
     db: Session = Depends(get_db)
 ):
     """
     Obtener lista de usuarios (solo bibliotecarios)
     """
-    users = UsuarioService.get_usuarios(db, skip=skip, limit=limit)
+    users = UsuarioService.get_usuarios(db)
     return users
 
 @router.get("/{usuario_id}", response_model=UsuarioResponse)

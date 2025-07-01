@@ -28,11 +28,11 @@ class UsuarioService:
         return db.query(Usuario).filter(Usuario.email == email).first()
     
     @staticmethod
-    def get_usuarios(db: Session, skip: int = 0, limit: int = 100) -> List[Usuario]:
+    def get_usuarios(db: Session) -> List[Usuario]:
         """
         Obtener lista de usuarios
         """
-        return db.query(Usuario).offset(skip).limit(limit).all()
+        return db.query(Usuario).all()
     
     @staticmethod
     def create_usuario(db: Session, usuario_data: UsuarioCreate) -> Usuario:

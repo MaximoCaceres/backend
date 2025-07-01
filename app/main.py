@@ -3,6 +3,10 @@ from app.config.settings import settings
 from app.middleware import error_handler
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from fastapi.requests import Request
+from fastapi.exception_handlers import RequestValidationError
+from fastapi.exceptions import RequestValidationError
 from app.routers import libros, prestamos, categoria, usuario, auth, dashboard
 from app.security.dependencies import get_current_user
 
@@ -17,6 +21,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    return JSONResponse(
+        status_code=422,
+        content={"detail": exc.errors(), "body": exc.body}
+    )
 
 app.add_middleware(error_handler.ErrorHandlerMiddleware)
 
