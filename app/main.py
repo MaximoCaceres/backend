@@ -1,5 +1,4 @@
-from app.config.database import get_db, SessionLocal, create_database, engine, Base
-from app.config.settings import settings
+from app.config.database import get_db, create_database
 from app.middleware import error_handler
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,7 +7,7 @@ from fastapi.requests import Request
 from fastapi.exception_handlers import RequestValidationError
 from fastapi.exceptions import RequestValidationError
 from app.routers import libros, prestamos, categoria, usuario, auth, dashboard
-from app.security.dependencies import get_current_user
+
 
 create_database()
 
@@ -41,4 +40,4 @@ app.include_router(dashboard.router, tags=["Dashboard"])
 
 @app.get("/")
 def get_users(db = Depends(get_db)):
-    return {"message": "API de gestión de biblioteca en funcionamiento"}
+    return {"message": "backend en funcionamiento"}

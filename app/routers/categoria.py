@@ -1,7 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException, status, Query
+from fastapi import APIRouter, Depends, status, Query
 from sqlalchemy.orm import Session
 from typing import List
-
 from app.config.database import get_db
 from app.models.usuario import Usuario
 from app.schemas.categoria import CategoriaCreate, CategoriaUpdate, CategoriaResponse, CategoriaContarLibros
@@ -12,15 +11,13 @@ router = APIRouter(prefix="/categorias", tags=["Categorias"])
 
 @router.get("/", response_model=List[CategoriaResponse],status_code=status.HTTP_200_OK)
 async def get_categorias(
-    skip: int = Query(0, ge=0),
-    limit: int = Query(100, ge=1, le=100),
     current_user: Usuario = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
     """
     Obtener lista de categorías
     """
-    categorias = CategoriaService.get_categorias(db, skip=skip, limit=limit)
+    categorias = CategoriaService.get_categorias(db)
     return categorias
 
 @router.get("/con-conteo", response_model=List[CategoriaContarLibros],status_code=status.HTTP_200_OK)

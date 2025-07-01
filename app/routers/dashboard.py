@@ -16,12 +16,11 @@ async def get_estadisticas_dashboard(
 ):
     """
     Obtener estadísticas para el dashboard (solo bibliotecarios)
-    
-    Indicadores requeridos:
-    1. Número total de libros en la biblioteca
-    2. Número total de préstamos activos
-    3. Número de usuarios registrados
-    4. Categoría de libros más popular (mayor cantidad de libros prestados)
+
+    número total de libros en la biblioteca
+    número total de préstamos activos
+    número de usuarios registrados
+    categoría de libros más popular (mayor cantidad de libros prestados)
     """
     estadisticas = PrestamoService.get_estadisticas_dashboard(db)
     

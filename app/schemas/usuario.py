@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr, Field, field_validator, SecretStr
-from typing import Optional,List
+from typing import Optional
 from enum import Enum
 
 class RolEnum(str, Enum):

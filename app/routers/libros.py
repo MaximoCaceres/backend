@@ -39,7 +39,6 @@ async def get_libros(
 
 @router.get("/disponibles", response_model=List[LibroResponse])
 async def get_libros_disponibles(
-    skip: int = Query(0, ge=0),
     current_user: Usuario = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):

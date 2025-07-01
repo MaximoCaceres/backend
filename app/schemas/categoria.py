@@ -1,5 +1,5 @@
-from pydantic import BaseModel, Field, field_validator
-from typing import Optional, List
+from pydantic import BaseModel, field_validator
+from typing import Optional
 
 class CategoriaBase(BaseModel):
     nombre:str
